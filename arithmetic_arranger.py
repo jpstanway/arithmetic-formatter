@@ -1,5 +1,7 @@
 def arithmetic_arranger(problems):
     global spacing
+    smGap = " " * 2
+    lgGap = " " * 4
     arranged_problems = ""
     line1 = ""
     line2 = ""
@@ -12,16 +14,16 @@ def arithmetic_arranger(problems):
 
         if (len(item[0]) > len(item[2])):
             spacing = len(item[0]) - len(item[2])
-            line1 += "  " + item[0] + " " * 4
-            line2 += item[1] + " " + (spacing * " ") + item[2] + " " * 4
-            line3 += len(item[0]) + 2 * "-" + " " * 4
+            line1 += smGap + item[0] + lgGap
+            line2 += item[1] + " " + (spacing * " ") + item[2] + lgGap
+            line3 += "-" * (len(item[0]) + 2) + lgGap
         else:
             spacing = len(item[2]) - len(item[0])
-            line1 += (spacing * " ") + item[0] + " " * 4
-            line2 += item[1] + " " + item[2] + " " * 4
-            line3 += len(item[2]) + 2 * "-" + " " * 4
+            line1 += smGap + spacing * " " + item[0] + lgGap
+            line2 += item[1] + " " + item[2] + lgGap
+            line3 += "-" * (len(item[2]) + 2) + lgGap
 
-        line4 += "  " + str(ans) + " " * 4
+        line4 += smGap + str(ans) + lgGap
 
     line1 += "\n"
     line2 += "\n"
