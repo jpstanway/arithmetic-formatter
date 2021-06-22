@@ -1,7 +1,16 @@
-def arithmetic_arranger(problems):
+def gap(size):
+    gap = " "
+    if (size == "md"):
+        return gap * 2
+    elif (size == "lg"):
+        return gap * 4
+    else:
+        return gap
+
+
+def arithmetic_arranger(problems, showAnswer=False):
     global spacing
-    smGap = " " * 2
-    lgGap = " " * 4
+    global ans
     arranged_problems = ""
     line1 = ""
     line2 = ""
@@ -10,55 +19,39 @@ def arithmetic_arranger(problems):
 
     for x in problems:
         item = x.split(" ")
-        ans = int(item[0]) + int(item[2])
+        op = item[1]
+        numA = item[0]
+        numB = item[2]
+        lenA = len(numA)
+        lenB = len(numB)
 
-        if (len(item[0]) > len(item[2])):
-            spacing = len(item[0]) - len(item[2])
-            line1 += smGap + item[0] + lgGap
-            line2 += item[1] + " " + (spacing * " ") + item[2] + lgGap
-            line3 += "-" * (len(item[0]) + 2) + lgGap
+        if (lenA > lenB):
+            spacing = lenA - lenB
+            line1 += gap("md") + numA + gap("lg")
+            line2 += op + gap("sm") + (spacing *
+                                       gap("sm")) + numB + gap("lg")
+            line3 += "-" * (lenA + 2) + gap("lg")
         else:
-            spacing = len(item[2]) - len(item[0])
-            line1 += smGap + spacing * " " + item[0] + lgGap
-            line2 += item[1] + " " + item[2] + lgGap
-            line3 += "-" * (len(item[2]) + 2) + lgGap
+            spacing = lenB - lenA
+            line1 += gap("md") + spacing * gap("sm") + numA + gap("lg")
+            line2 += op + gap("sm") + numB + gap("lg")
+            line3 += "-" * (lenB + 2) + gap("lg")
 
-        line4 += smGap + str(ans) + lgGap
+        if (op == "+"):
+            ans = int(numA) + int(numB)
+        else:
+            ans = int(numA) - int(numB)
+
+        line4 += gap("md") + str(ans) + gap("lg")
 
     line1 += "\n"
     line2 += "\n"
     line3 += "\n"
     line4 += "\n"
 
-    arranged_problems += line1 + line2 + line3 + line4
+    arranged_problems += line1 + line2 + line3
 
-    # global width
-    # global diff
-    # global a
-    # global b
-    # arranged_problems = []
-
-    # for x in problems:
-    #     items = x.split(" ")
-    #     op = items[1] + " "
-    #     c = int(items[0]) + int(items[2])
-
-    #     if len(items[0]) > len(items[2]):
-    #         a = "  " + items[0] + "\n"
-    #         width = len(a)
-    #         diff = " " * (width - len(items[2]))
-    #         b = op + diff + items[2] + "\n"
-    #     else:
-    #         b = op + "  " + items[2] + "\n"
-    #         width = len(b)
-    #         diff = " " * (width - len(items[0]))
-    #         a = "  " + diff + items[0] + "\n"
-
-    #     final = a + b + "-" * (width + 2) + "\n" + diff + " " + str(c)
-
-    #     arranged_problems.append(final)
-
-    # for y in arranged_problems:
-    #     print(y)
+    if (showAnswer):
+        arranged_problems += line4
 
     return arranged_problems
