@@ -1,15 +1,11 @@
 def gap(size):
     gap = " "
-    if (size == "md"):
-        return gap * 2
-    elif (size == "lg"):
-        return gap * 4
-    else:
-        return gap
+    return gap * size
 
 
 def arithmetic_arranger(problems, showAnswer=False):
     global spacing
+    global underline
     global ans
     arranged_problems = ""
     line1 = ""
@@ -27,22 +23,24 @@ def arithmetic_arranger(problems, showAnswer=False):
 
         if (lenA > lenB):
             spacing = lenA - lenB
-            line1 += gap("md") + numA + gap("lg")
-            line2 += op + gap("sm") + (spacing *
-                                       gap("sm")) + numB + gap("lg")
-            line3 += "-" * (lenA + 2) + gap("lg")
+            underline = lenA + 2
+            line1 += gap(2) + numA + gap(4)
+            line2 += op + gap(1) + (spacing *
+                                    gap(1)) + numB + gap(4)
+            line3 += "-" * underline + gap(4)
         else:
             spacing = lenB - lenA
-            line1 += gap("md") + spacing * gap("sm") + numA + gap("lg")
-            line2 += op + gap("sm") + numB + gap("lg")
-            line3 += "-" * (lenB + 2) + gap("lg")
+            underline = lenB + 2
+            line1 += gap(2) + spacing * gap(1) + numA + gap(4)
+            line2 += op + gap(1) + numB + gap(4)
+            line3 += "-" * underline + gap(4)
 
         if (op == "+"):
-            ans = int(numA) + int(numB)
+            ans = str(int(numA) + int(numB))
         else:
-            ans = int(numA) - int(numB)
+            ans = str(int(numA) - int(numB))
 
-        line4 += gap("md") + str(ans) + gap("lg")
+        line4 += gap(underline - len(ans)) + ans + gap(4)
 
     line1 += "\n"
     line2 += "\n"
