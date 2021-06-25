@@ -1,3 +1,13 @@
+
+def getError(type):
+    errors = {
+        "problems": "Error: Too many problems.",
+        "numbers": "Error: Numbers cannot be more than four digits.",
+        "operators": "Error: Operator must be '+' or '-'.",
+    }
+    return errors[type]
+
+
 def gap(size):
     gap = " "
     return gap * size
@@ -13,6 +23,9 @@ def arithmetic_arranger(problems, showAnswer=False):
     line3 = ""
     line4 = ""
 
+    if (len(problems) > 5):
+        return getError("problems")
+
     for x in problems:
         item = x.split(" ")
         op = item[1]
@@ -20,6 +33,11 @@ def arithmetic_arranger(problems, showAnswer=False):
         numB = item[2]
         lenA = len(numA)
         lenB = len(numB)
+
+        if (lenA > 4 or lenB > 4):
+            return getError("numbers")
+        elif (op != "+" and op != "-"):
+            return getError("operators")
 
         if (lenA > lenB):
             spacing = lenA - lenB
