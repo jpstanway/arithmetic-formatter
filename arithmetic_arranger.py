@@ -26,8 +26,8 @@ def arithmetic_arranger(problems, showAnswer=False):
     if (len(problems) > 5):
         return getError("problems")
 
-    for x in problems:
-        item = x.split(" ")
+    for problem in problems:
+        item = problem.split(" ")
         op = item[1]
         numA = item[0]
         numB = item[2]
@@ -60,10 +60,10 @@ def arithmetic_arranger(problems, showAnswer=False):
 
         line4 += gap(underline - len(ans)) + ans + gap(4)
 
-    line1 += "\n"
-    line2 += "\n"
-    line3 += "\n"
-    line4 += "\n"
+    line1 = line1.rstrip() + "\n"
+    line2 = line2.rstrip() + "\n"
+    line3 = line3.rstrip() + "\n"
+    line4 = line4.rstrip()
 
     arranged_problems += line1 + line2 + line3
 
