@@ -4,6 +4,7 @@ def getError(type):
         "problems": "Error: Too many problems.",
         "numbers": "Error: Numbers cannot be more than four digits.",
         "operators": "Error: Operator must be '+' or '-'.",
+        "types": "Error: Numbers must only contain digits.",
     }
     return errors[type]
 
@@ -34,6 +35,12 @@ def arithmetic_arranger(problems, showAnswer=False):
         lenA = len(numA)
         lenB = len(numB)
 
+        try:
+            int(numA)
+            int(numB)
+        except:
+            return getError("types")
+
         if (lenA > 4 or lenB > 4):
             return getError("numbers")
         elif (op != "+" and op != "-"):
@@ -62,12 +69,12 @@ def arithmetic_arranger(problems, showAnswer=False):
 
     line1 = line1.rstrip() + "\n"
     line2 = line2.rstrip() + "\n"
-    line3 = line3.rstrip() + "\n"
+    line3 = line3.rstrip()
     line4 = line4.rstrip()
 
     arranged_problems += line1 + line2 + line3
 
     if (showAnswer):
-        arranged_problems += line4
+        arranged_problems += "\n" + line4
 
     return arranged_problems
